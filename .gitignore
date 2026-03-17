@@ -1,0 +1,23 @@
+# Sistema
+.DS_Store
+
+# Android
+.android/
+build/
+.gradle/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Variables de entorno
+.env
+server/.env
+
+# Dependencias
+node_modules/
+
+# Otros
+*.lock
