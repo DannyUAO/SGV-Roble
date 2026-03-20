@@ -1,0 +1,37 @@
+/* ── DASHBOARD ── */
+.quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.quick-card {
+  background: var(--white); border-radius: 16px; padding: 22px 18px;
+  border: 1px solid var(--border); cursor: pointer;
+  transition: all 0.2s; text-align: center;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+.quick-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary);
+}
+.qc-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin: 0 auto 14px;
+}
+.qc-title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.qc-sub   { font-size: 11px; color: var(--muted); }
+
+/* ── Feed en vivo ── */
+.live-feed { display: flex; flex-direction: column; gap: 0; }
+.feed-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px; border-bottom: 1px solid #f1f1f1;
+  transition: background 0.15s;
+}
+.feed-item:hover { background: var(--gray-50); }
+.feed-item:last-child { border-bottom: none; }
+.feed-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.feed-dot.entry { background: var(--green2); box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2); }
+.feed-dot.exit  { background: var(--orange);  box-shadow: 0 0 0 3px rgba(212, 96, 10, 0.2); }
+.feed-info { flex: 1; }
+.feed-name   { font-size: 13px; font-weight: 600; color: var(--dark); }
+.feed-detail { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.feed-time   { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }

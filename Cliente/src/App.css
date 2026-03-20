@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ── Variables de color ── */
+:root {
+  --primary:   #ffde59;
+  --primary-d: #e6c740;
+  --black:     #000000;
+  --dark:      #1a1a1a;
+  --gray-900:  #2a2a2a;
+  --gray-700:  #4a4a4a;
+  --gray-500:  #7a7a7a;
+  --gray-300:  #c5c5c5;
+  --gray-100:  #e5e5e5;
+  --gray-50:   #f4f4f4;
+  --white:     #ffffff;
+  --red:       #C0392B;
+  --green:     #1A7A4A;
+  --green2:    #27AE60;
+  --orange:    #D4600A;
+  --purple:    #6C3483;
+  --teal:      #148F77;
+  --navy:      var(--black);
+  --blue:      var(--gray-900);
+  --blue2:     var(--gray-700);
+  --blue3:     var(--gray-500);
+  --gold:      var(--primary-d);
+  --bg:        var(--gray-50);
+  --card:      var(--white);
+  --border:    var(--gray-300);
+  --text:      var(--dark);
+  --muted:     var(--gray-500);
+  --sidebar:   var(--black);
+}
+
+/* ── Reset ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+/* ── Tabla ── */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: var(--black); }
+thead th {
+  padding: 12px 14px; text-align: left;
+  font-size: 11px; font-weight: 700; color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+tbody tr { border-bottom: 1px solid #f1f1f1; transition: background 0.15s; }
+tbody tr:hover { background: var(--gray-50); }
+tbody td { padding: 12px 14px; font-size: 13px; color: var(--dark); }
+tbody tr:last-child { border-bottom: none; }
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+}
+.badge-green  { background: #EAFAF1; color: var(--green2); }
+.badge-red    { background: #FDEDEC; color: var(--red); }
+.badge-blue   { background: rgba(255, 222, 89, 0.15); color: var(--gray-700); }
+.badge-orange { background: #FEF5EC; color: var(--orange); }
+.badge-purple { background: #F5EEF8; color: var(--purple); }
+
+/* ── Botones ── */
+.btn {
+  padding: 9px 18px; border-radius: 10px; border: none;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all 0.18s; display: inline-flex;
+  align-items: center; gap: 7px;
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--black);
+  box-shadow: 0 3px 12px rgba(255, 222, 89, 0.35);
+}
+.btn-primary:hover { background: var(--primary-d); }
+.btn-success { background: linear-gradient(135deg, #15803d, var(--green2)); color: var(--white); box-shadow: 0 3px 12px rgba(39, 174, 96, 0.25); }
+.btn-danger  { background: linear-gradient(135deg, #991b1b, var(--red)); color: var(--white); }
+.btn-ghost   { background: var(--gray-100); color: var(--muted); border: 1px solid var(--border); }
+.btn:hover   { transform: translateY(-1px); }
+
+/* ── Formularios ── */
+.form-row { display: grid; gap: 16px; margin-bottom: 16px; }
+.form-row.cols-2 { grid-template-columns: 1fr 1fr; }
+.form-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.fgroup label {
+  display: block; font-size: 11px; font-weight: 700;
+  color: var(--muted); margin-bottom: 6px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.finput {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  font-size: 13px; color: var(--dark); background: var(--gray-50);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.finput:focus { outline: none; border-color: var(--primary); background: var(--white); }
+.finput.filled { border-color: var(--primary); background: rgba(255, 222, 89, 0.06); }
+.auto-field {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--primary); border-radius: 10px;
+  font-size: 13px; color: var(--gray-700);
+  background: rgba(255, 222, 89, 0.1); font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Notificaciones ── */
+.notif-box {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px; border-radius: 12px; margin-bottom: 10px;
+}
+.notif-box.info    { background: rgba(255, 222, 89, 0.1); border: 1px solid rgba(255, 222, 89, 0.4); }
+.notif-box.warn    { background: #FFFBEB; border: 1px solid #FCD34D; }
+.notif-box.success { background: #EAFAF1; border: 1px solid #A9DFBF; }
+.notif-icon { font-size: 18px; flex-shrink: 0; }
+.notif-text h4 { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+.notif-text p  { font-size: 12px; color: var(--muted); }
+
+/* ── Buscador ── */
+.search-bar { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
+.search-input-wrap { flex: 1; position: relative; }
+.search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--muted); }
+.search-input {
+  width: 100%; padding: 11px 14px 11px 38px;
+  border: 1.5px solid var(--border); border-radius: 11px;
+  font-size: 13px; color: var(--dark); background: var(--white);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.search-input:focus { outline: none; border-color: var(--primary); }
+
+/* ── Card general ── */
+.card {
+  background: var(--white); border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.section-header h3 { font-size: 15px; font-weight: 700; color: var(--dark); }
+.section-header .sh-meta { font-size: 12px; color: var(--muted); }
+.content { flex: 1; padding: 24px 28px; overflow-y: auto; }
+.action-btns { display: flex; gap: 6px; }
+
+/* ── Estados vacíos ── */
+.empty-state {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 32px 20px; text-align: center;
+  color: var(--muted);
+}
+.empty-icon { font-size: 32px; margin-bottom: 8px; }
+.empty-state p { font-size: 12px; font-weight: 500; }
+
+/* ── Error ── */
+.error-msg {
+  background: #FDEDEC; border: 1px solid #F1948A;
+  border-radius: 10px; padding: 10px 14px;
+  font-size: 12px; font-weight: 600; color: var(--red);
+}
+
+/* ── Layout base ── */
+.app-layout { display: flex; min-height: 100vh; }

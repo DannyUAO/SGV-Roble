@@ -1,0 +1,35 @@
+/* ── TOPBAR ── */
+.main { flex: 1; display: flex; flex-direction: column; background: var(--bg); overflow: hidden; }
+
+.topbar {
+  height: 60px; background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; flex-shrink: 0;
+}
+.topbar-left { display: flex; align-items: center; gap: 14px; }
+.tb-back {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: var(--gray-100); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 16px; transition: background 0.2s;
+}
+.tb-back:hover { background: var(--gray-300); }
+.topbar h2 { font-size: 17px; font-weight: 700; color: var(--dark); }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.tb-badge { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.tb-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: var(--muted); font-weight: 600;
+}
+.tb-notif {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--gray-100); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; cursor: pointer; position: relative;
+}
+.notif-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #E74C3C; border: 2px solid var(--white);
+  position: absolute; top: 6px; right: 6px;
+}

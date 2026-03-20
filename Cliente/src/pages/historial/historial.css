@@ -1,0 +1,16 @@
+/* ── HISTORIAL ── */
+.filter-bar {
+  background: var(--white); border-radius: 14px; padding: 18px 20px;
+  border: 1px solid var(--border); margin-bottom: 20px;
+  display: grid; grid-template-columns: repeat(4, 1fr) auto; gap: 12px; align-items: end;
+}
+.pagination { display: flex; justify-content: center; align-items: center; gap: 6px; padding: 16px; }
+.pg-btn {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  border: 1.5px solid var(--border); background: var(--white); color: var(--dark);
+  transition: all 0.15s;
+}
+.pg-btn.active { background: var(--black); border-color: var(--black); color: var(--primary); }
+.pg-btn:hover:not(.active) { border-color: var(--primary); color: var(--dark); }
