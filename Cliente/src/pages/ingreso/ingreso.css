@@ -1,0 +1,24 @@
+/* ── INGRESO ── */
+.ingreso-grid { display: grid; grid-template-columns: 1fr 340px; gap: 20px; }
+
+.freq-card {
+  background: linear-gradient(135deg, rgba(255,222,89,0.12), rgba(255,222,89,0.06));
+  border: 1.5px solid rgba(255, 222, 89, 0.35); border-radius: 14px; padding: 18px;
+  margin-bottom: 16px;
+}
+.freq-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.freq-avatar {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: var(--primary);
+}
+.freq-name { font-size: 14px; font-weight: 700; color: var(--dark); }
+.freq-sub  { font-size: 11px; color: var(--muted); }
+.freq-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.freq-stat {
+  background: rgba(255, 255, 255, 0.7); border-radius: 9px;
+  padding: 9px 12px; text-align: center;
+}
+.freq-stat-val { font-size: 18px; font-weight: 800; color: var(--dark); }
+.freq-stat-lbl { font-size: 10px; color: var(--muted); }
