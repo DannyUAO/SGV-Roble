@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import visitasservice from '../../services/visitasservice';
 import authservice from '../../services/authservice';
 import './dashboard.css';
+import '../../componentes/sidebar/sidebar.css';
 
 export default function Dashboard({ navegar, cerrarSesion }) {
   const [dentroAhora, setDentroAhora] = useState([]);
