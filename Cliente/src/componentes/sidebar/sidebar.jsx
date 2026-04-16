@@ -19,16 +19,23 @@ export default function Sidebar({ paginaActiva, navegar, cerrarSesion }) {
 
   return (
     <aside className="sidebar">
+
+      {/* ── Marca ── */}
       <div className="sb-brand">
         <div className="sb-brand-inner">
           <div className="sb-logo">🏢</div>
-          <div>
+          <div className="sb-brand-text">
             <h3>SGV-Roble</h3>
             <p>Gestión de Visitantes</p>
+          </div>
+          <div className="sb-status">
+            <span className="sb-status-dot"></span>
+            EN LÍNEA
           </div>
         </div>
       </div>
 
+      {/* ── Navegación ── */}
       <nav className="sb-nav">
         {items.map(item => (
           <React.Fragment key={item.id}>
@@ -37,21 +44,26 @@ export default function Sidebar({ paginaActiva, navegar, cerrarSesion }) {
               className={`sb-item${paginaActiva === item.id ? ' active' : ''}`}
               onClick={() => navegar(item.id)}
             >
-              <span className="si-icon">{item.icon}</span>
-              <span>{item.label}</span>
+              <div className="si-icon-wrap">{item.icon}</div>
+              <span className="sb-item-label">{item.label}</span>
             </div>
           </React.Fragment>
         ))}
       </nav>
 
+      {/* ── Usuario ── */}
       <div className="sb-user">
-        <div className="sb-avatar">{usuario?.nombre?.[0]?.toUpperCase() || 'U'}</div>
+        <div className="sb-avatar-wrap">
+          <div className="sb-avatar">{usuario?.nombre?.[0]?.toUpperCase() || 'U'}</div>
+          <span className="sb-avatar-online"></span>
+        </div>
         <div className="sb-user-info">
           <h4>{usuario?.nombre}</h4>
-          <p>{usuario?.rol}{usuario?.turno ? ` · ${usuario.turno}` : ''}</p>
+          <p>{usuario?.rol}{usuario?.turno ? ` · turno ${usuario.turno}` : ''}</p>
         </div>
         <div className="sb-logout" onClick={cerrarSesion} title="Cerrar sesión">⏻</div>
       </div>
+
     </aside>
   );
 }
