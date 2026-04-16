@@ -25,52 +25,64 @@ export default function Login({ onLogin }) {
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <div className="login-logo">🏢</div>
-          <h1 className="login-title">SVG-ROBLE</h1>
-          <p className="login-subtitle">Sistema de Gestión de Visitantes</p>
+
+      {/* Panel izquierdo — identidad visual */}
+      <div className="login-left">
+        <div className="ll-content">
+          <div className="ll-logo">🏢</div>
+          <h1 className="ll-title">SGV-Roble</h1>
+          <p className="ll-subtitle">Sistema de Gestión de Visitantes</p>
+          <div className="ll-features">
+            <div className="ll-feature">Control de acceso en tiempo real</div>
+            <div className="ll-feature">Historial completo de visitas</div>
+            <div className="ll-feature">Gestión de residentes y reportes</div>
+          </div>
         </div>
+        <p className="ll-footer">Universidad Autónoma de Occidente · 2026</p>
+      </div>
 
-        <h2 className="login-welcome">Bienvenido 👋</h2>
-        <p className="login-desc">Inicia sesión para acceder al sistema</p>
+      {/* Panel derecho — formulario */}
+      <div className="login-right">
+        <div className="login-card">
+          <h2 className="login-welcome">Bienvenido 👋</h2>
+          <p className="login-desc">Inicia sesión para acceder al sistema</p>
 
-        <form onSubmit={handleLogin}>
-          <div className="form-group">
-            <label>Número de documento</label>
-            <input
-              className="form-input"
-              type="text"
-              placeholder="Tu cédula o documento"
-              value={documento}
-              onChange={e => setDocumento(e.target.value)}
-              required
-            />
+          <form onSubmit={handleLogin}>
+            <div className="form-group">
+              <label>Número de documento</label>
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Tu cédula o documento"
+                value={documento}
+                onChange={e => setDocumento(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Contraseña</label>
+              <input
+                className="form-input"
+                type="password"
+                placeholder="Tu contraseña"
+                value={contrasena}
+                onChange={e => setContrasena(e.target.value)}
+                required
+              />
+              <div className="hint-box">⚠️ Máximo 3 intentos · Bloqueo automático 5 min</div>
+            </div>
+
+            {error && <div className="error-box">❌ {error}</div>}
+
+            <button className="btn-login" type="submit" disabled={cargando}>
+              {cargando ? 'Ingresando...' : 'INGRESAR AL SISTEMA →'}
+            </button>
+          </form>
+
+          <div className="login-footer">
+            ¿Olvidaste tu contraseña? Contacta al administrador
           </div>
-
-          <div className="form-group">
-            <label>Contraseña</label>
-            <input
-              className="form-input"
-              type="password"
-              placeholder="Tu contraseña"
-              value={contrasena}
-              onChange={e => setContrasena(e.target.value)}
-              required
-            />
-            <div className="hint-box">⚠️ Máximo 3 intentos · Bloqueo automático 5 min</div>
-          </div>
-
-          {error && <div className="error-box">❌ {error}</div>}
-
-          <button className="btn-login" type="submit" disabled={cargando}>
-            {cargando ? 'Ingresando...' : 'INGRESAR AL SISTEMA →'}
-          </button>
-        </form>
-
-        <div className="login-footer">
-          ¿Olvidaste tu contraseña? Contacta al administrador<br />
-          SVG-Roble · Universidad Autónoma de Occidente · 2026
         </div>
       </div>
     </div>

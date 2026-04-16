@@ -1,17 +1,16 @@
 // Cliente/src/pages/ingreso/ingreso.jsx
 import React, { useState } from 'react';
 import visitasservice from '../../services/visitasservice';
-import authservice from '../../services/authservice';
+import Sidebar from '../../componentes/sidebar/sidebar';
 import './ingreso.css';
 
 export default function Ingreso({ navegar, cerrarSesion }) {
-  const usuario = authservice.getUsuario();
   const [form, setForm] = useState({
     nombre: '', documento: '', apartamento: '',
     residente_responsable: '', correo: '', telefono: ''
   });
-  const [error,   setError]   = useState('');
-  const [exito,   setExito]   = useState(false);
+  const [error,    setError]    = useState('');
+  const [exito,    setExito]    = useState(false);
   const [cargando, setCargando] = useState(false);
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
@@ -44,24 +43,7 @@ export default function Ingreso({ navegar, cerrarSesion }) {
 
   return (
     <div className="app-layout">
-      <aside className="sidebar">
-        <div className="sb-brand">
-          <div className="sb-logo">🏢</div>
-          <div><h3>SVG-Roble</h3><p>Gestión de Visitantes</p></div>
-        </div>
-        <nav className="sb-nav">
-          <div className="sb-item" onClick={() => navegar('dashboard')}><span className="si-icon">🏠</span><span>Dashboard</span></div>
-          <div className="sb-item active"><span className="si-icon">➕</span><span>Registrar Ingreso</span></div>
-          <div className="sb-item" onClick={() => navegar('salida')}><span className="si-icon">🚪</span><span>Registrar Salida</span></div>
-          <div className="sb-item" onClick={() => navegar('historial')}><span className="si-icon">📋</span><span>Historial</span></div>
-          <div className="sb-item" onClick={() => navegar('frecuentes')}><span className="si-icon">⭐</span><span>Frecuentes</span></div>
-        </nav>
-        <div className="sb-user">
-          <div className="sb-avatar">{usuario?.nombre?.[0] || 'U'}</div>
-          <div className="sb-user-info"><h4>{usuario?.nombre}</h4><p>{usuario?.rol}</p></div>
-          <div className="sb-logout" onClick={cerrarSesion}>⏻</div>
-        </div>
-      </aside>
+      <Sidebar paginaActiva="ingreso" navegar={navegar} cerrarSesion={cerrarSesion} />
 
       <main className="main">
         <div className="topbar">

@@ -1,15 +1,14 @@
 // Cliente/src/pages/historial/historial.jsx
 import React, { useEffect, useState } from 'react';
 import visitasservice from '../../services/visitasservice';
-import authservice from '../../services/authservice';
+import Sidebar from '../../componentes/sidebar/sidebar';
 import './historial.css';
 
 export default function Historial({ navegar, cerrarSesion }) {
-  const usuario = authservice.getUsuario();
   const [historial, setHistorial] = useState([]);
   const [filtros,   setFiltros]   = useState({ busqueda: '', apartamento: '', desde: '', hasta: '' });
 
-  useEffect(() => { cargar(); }, []);
+  useEffect(() => { cargar(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const cargar = async () => {
     try {
@@ -25,24 +24,7 @@ export default function Historial({ navegar, cerrarSesion }) {
 
   return (
     <div className="app-layout">
-      <aside className="sidebar">
-        <div className="sb-brand">
-          <div className="sb-logo">🏢</div>
-          <div><h3>SVG-Roble</h3><p>Gestión de Visitantes</p></div>
-        </div>
-        <nav className="sb-nav">
-          <div className="sb-item" onClick={() => navegar('dashboard')}><span className="si-icon">🏠</span><span>Dashboard</span></div>
-          <div className="sb-item" onClick={() => navegar('ingreso')}><span className="si-icon">➕</span><span>Registrar Ingreso</span></div>
-          <div className="sb-item" onClick={() => navegar('salida')}><span className="si-icon">🚪</span><span>Registrar Salida</span></div>
-          <div className="sb-item active"><span className="si-icon">📋</span><span>Historial</span></div>
-          <div className="sb-item" onClick={() => navegar('frecuentes')}><span className="si-icon">⭐</span><span>Frecuentes</span></div>
-        </nav>
-        <div className="sb-user">
-          <div className="sb-avatar">{usuario?.nombre?.[0] || 'U'}</div>
-          <div className="sb-user-info"><h4>{usuario?.nombre}</h4><p>{usuario?.rol}</p></div>
-          <div className="sb-logout" onClick={cerrarSesion}>⏻</div>
-        </div>
-      </aside>
+      <Sidebar paginaActiva="historial" navegar={navegar} cerrarSesion={cerrarSesion} />
 
       <main className="main">
         <div className="topbar">
@@ -53,7 +35,6 @@ export default function Historial({ navegar, cerrarSesion }) {
         </div>
 
         <div className="content">
-          {/* Filtros */}
           <div className="card" style={{ padding: 16, marginBottom: 16 }}>
             <div className="form-row cols-2">
               <div className="fgroup">
@@ -86,7 +67,6 @@ export default function Historial({ navegar, cerrarSesion }) {
             <button className="btn btn-primary" onClick={cargar}>🔍 Buscar</button>
           </div>
 
-          {/* Tabla */}
           <div className="card">
             <table className="tabla">
               <thead>

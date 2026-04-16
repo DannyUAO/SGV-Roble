@@ -63,6 +63,7 @@ tbody tr:last-child { border-bottom: none; }
 }
 .badge-green  { background: #EAFAF1; color: var(--green2); }
 .badge-red    { background: #FDEDEC; color: var(--red); }
+.badge-gray   { background: #F0F0F0; color: var(--gray-500); }
 .badge-blue   { background: rgba(255, 222, 89, 0.15); color: var(--gray-700); }
 .badge-orange { background: #FEF5EC; color: var(--orange); }
 .badge-purple { background: #F5EEF8; color: var(--purple); }
@@ -138,10 +139,16 @@ tbody tr:last-child { border-bottom: none; }
 /* ── Card general ── */
 .card {
   background: var(--white); border-radius: 16px;
-  border: 1px solid var(--border);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid #ebebeb;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
+.card-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid #f1f1f1;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.card-header h3 { font-size: 14px; font-weight: 700; color: var(--dark); }
 .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .section-header h3 { font-size: 15px; font-weight: 700; color: var(--dark); }
 .section-header .sh-meta { font-size: 12px; color: var(--muted); }
@@ -158,11 +165,31 @@ tbody tr:last-child { border-bottom: none; }
 .empty-icon { font-size: 32px; margin-bottom: 8px; }
 .empty-state p { font-size: 12px; font-weight: 500; }
 
-/* ── Error ── */
-.error-msg {
+/* ── Mensajes de feedback ── */
+.error-msg, .error-box {
   background: #FDEDEC; border: 1px solid #F1948A;
-  border-radius: 10px; padding: 10px 14px;
-  font-size: 12px; font-weight: 600; color: var(--red);
+  border-radius: 12px; padding: 13px 16px;
+  font-size: 13px; font-weight: 600; color: var(--red);
+  margin-bottom: 16px;
+}
+.exito-box {
+  background: #EAFAF1; border: 1px solid #A9DFBF;
+  border-radius: 12px; padding: 13px 16px;
+  font-size: 13px; font-weight: 600; color: var(--green);
+  margin-bottom: 16px; display: flex; align-items: center;
+}
+.exito-box button {
+  margin-left: auto; background: var(--green); color: var(--white);
+  border: none; border-radius: 8px; padding: 6px 14px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.mensaje-box {
+  border-radius: 12px; padding: 13px 16px;
+  font-size: 13px; font-weight: 600; margin-bottom: 16px;
+  background: rgba(255, 222, 89, 0.12);
+  border: 1px solid rgba(255, 222, 89, 0.5);
+  color: var(--gray-700);
 }
 
 /* ── Layout base ── */

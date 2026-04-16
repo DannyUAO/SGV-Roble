@@ -1,10 +1,9 @@
 // Cliente/src/pages/reportes/reportes.jsx
 import React, { useEffect, useState } from 'react';
 import visitasservice from '../../services/visitasservice';
-import authservice from '../../services/authservice';
+import Sidebar from '../../componentes/sidebar/sidebar';
 
 export default function Reportes({ navegar, cerrarSesion }) {
-  const usuario = authservice.getUsuario();
   const [historial, setHistorial] = useState([]);
 
   useEffect(() => {
@@ -22,27 +21,7 @@ export default function Reportes({ navegar, cerrarSesion }) {
 
   return (
     <div className="app-layout">
-      <aside className="sidebar">
-        <div className="sb-brand">
-          <div className="sb-logo">🏢</div>
-          <div><h3>SVG-Roble</h3><p>Gestión de Visitantes</p></div>
-        </div>
-        <nav className="sb-nav">
-          <div className="sb-item" onClick={() => navegar('dashboard')}><span className="si-icon">🏠</span><span>Dashboard</span></div>
-          <div className="sb-item" onClick={() => navegar('ingreso')}><span className="si-icon">➕</span><span>Registrar Ingreso</span></div>
-          <div className="sb-item" onClick={() => navegar('salida')}><span className="si-icon">🚪</span><span>Registrar Salida</span></div>
-          <div className="sb-item" onClick={() => navegar('historial')}><span className="si-icon">📋</span><span>Historial</span></div>
-          <div className="sb-item" onClick={() => navegar('frecuentes')}><span className="si-icon">⭐</span><span>Frecuentes</span></div>
-          <div className="sb-section-label">Administración</div>
-          <div className="sb-item active"><span className="si-icon">📊</span><span>Reportes</span></div>
-          <div className="sb-item" onClick={() => navegar('usuarios')}><span className="si-icon">👥</span><span>Usuarios</span></div>
-        </nav>
-        <div className="sb-user">
-          <div className="sb-avatar">{usuario?.nombre?.[0] || 'U'}</div>
-          <div className="sb-user-info"><h4>{usuario?.nombre}</h4><p>{usuario?.rol}</p></div>
-          <div className="sb-logout" onClick={cerrarSesion}>⏻</div>
-        </div>
-      </aside>
+      <Sidebar paginaActiva="reportes" navegar={navegar} cerrarSesion={cerrarSesion} />
 
       <main className="main">
         <div className="topbar">

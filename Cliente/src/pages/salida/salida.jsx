@@ -1,11 +1,10 @@
 // Cliente/src/pages/salida/salida.jsx
 import React, { useEffect, useState } from 'react';
 import visitasservice from '../../services/visitasservice';
-import authservice from '../../services/authservice';
+import Sidebar from '../../componentes/sidebar/sidebar';
 import './salida.css';
 
 export default function Salida({ navegar, cerrarSesion }) {
-  const usuario = authservice.getUsuario();
   const [dentro,   setDentro]   = useState([]);
   const [busqueda, setBusqueda] = useState('');
   const [mensaje,  setMensaje]  = useState('');
@@ -38,24 +37,7 @@ export default function Salida({ navegar, cerrarSesion }) {
 
   return (
     <div className="app-layout">
-      <aside className="sidebar">
-        <div className="sb-brand">
-          <div className="sb-logo">🏢</div>
-          <div><h3>SVG-Roble</h3><p>Gestión de Visitantes</p></div>
-        </div>
-        <nav className="sb-nav">
-          <div className="sb-item" onClick={() => navegar('dashboard')}><span className="si-icon">🏠</span><span>Dashboard</span></div>
-          <div className="sb-item" onClick={() => navegar('ingreso')}><span className="si-icon">➕</span><span>Registrar Ingreso</span></div>
-          <div className="sb-item active"><span className="si-icon">🚪</span><span>Registrar Salida</span></div>
-          <div className="sb-item" onClick={() => navegar('historial')}><span className="si-icon">📋</span><span>Historial</span></div>
-          <div className="sb-item" onClick={() => navegar('frecuentes')}><span className="si-icon">⭐</span><span>Frecuentes</span></div>
-        </nav>
-        <div className="sb-user">
-          <div className="sb-avatar">{usuario?.nombre?.[0] || 'U'}</div>
-          <div className="sb-user-info"><h4>{usuario?.nombre}</h4><p>{usuario?.rol}</p></div>
-          <div className="sb-logout" onClick={cerrarSesion}>⏻</div>
-        </div>
-      </aside>
+      <Sidebar paginaActiva="salida" navegar={navegar} cerrarSesion={cerrarSesion} />
 
       <main className="main">
         <div className="topbar">
@@ -66,7 +48,7 @@ export default function Salida({ navegar, cerrarSesion }) {
         </div>
 
         <div className="content">
-          {mensaje && <div className="mensaje-box">{mensaje}</div>}
+          {mensaje && <div className={mensaje.startsWith('✅') ? 'exito-box' : 'error-box'}>{mensaje}</div>}
 
           <input className="search-input" placeholder="Buscar por nombre, documento o apartamento..."
             value={busqueda} onChange={e => setBusqueda(e.target.value)} />
