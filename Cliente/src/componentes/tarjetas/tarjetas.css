@@ -1,0 +1,37 @@
+/* ── TARJETAS KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.kpi-card {
+  border-radius: 18px;
+  padding: 22px 20px;
+  position: relative; overflow: hidden;
+  border: 1px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Colores de fondo por tipo */
+.kpi-card.c-blue   { background: linear-gradient(135deg, #fffde8 0%, #fff9c4 100%); border-color: rgba(255, 222, 89, 0.4); }
+.kpi-card.c-green  { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color: rgba(39, 174, 96, 0.25); }
+.kpi-card.c-orange { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border-color: rgba(212, 96, 10, 0.2); }
+.kpi-card.c-purple { background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border-color: rgba(108, 52, 131, 0.2); }
+
+.kpi-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+  margin-bottom: 16px;
+}
+.kpi-card.c-blue   .kpi-icon { background: rgba(255, 222, 89, 0.4); }
+.kpi-card.c-green  .kpi-icon { background: rgba(39, 174, 96, 0.15); }
+.kpi-card.c-orange .kpi-icon { background: rgba(212, 96, 10, 0.12); }
+.kpi-card.c-purple .kpi-icon { background: rgba(108, 52, 131, 0.12); }
+
+.kpi-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.kpi-trend { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; }
+.trend-up   { background: #EAFAF1; color: var(--green2); }
+.trend-down { background: #FDEDEC; color: var(--red); }
+
+.kpi-val    { font-size: 36px; font-weight: 800; color: var(--dark); margin-bottom: 4px; line-height: 1; }
+.kpi-label  { font-size: 12px; color: var(--gray-500); font-weight: 500; }

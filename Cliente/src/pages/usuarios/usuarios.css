@@ -1,0 +1,30 @@
+/* ── USUARIOS ── */
+.users-grid { display: grid; grid-template-columns: 1fr 340px; gap: 20px; }
+.user-form-card {
+  background: var(--white); border-radius: 16px;
+  border: 1px solid var(--border); overflow: hidden;
+}
+.ufc-header {
+  padding: 18px 20px; border-bottom: 1px solid var(--border);
+  background: var(--black);
+}
+.ufc-header h3 { font-size: 14px; font-weight: 700; color: var(--primary); }
+.ufc-body { padding: 20px; }
+
+.role-select { display: flex; gap: 8px; }
+.rs-btn {
+  flex: 1; padding: 10px; border-radius: 10px;
+  border: 2px solid var(--border); background: var(--gray-50);
+  cursor: pointer; text-align: center; font-size: 12px;
+  font-weight: 600; color: var(--muted); transition: all 0.2s;
+}
+.rs-btn.active.vigilante { border-color: var(--primary); background: rgba(255, 222, 89, 0.12); color: var(--dark); }
+.rs-btn.active.admin     { border-color: var(--purple); background: #F5EEF8; color: var(--purple); }
+
+.sec-list { display: flex; flex-direction: column; gap: 8px; }
+.sec-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; background: var(--gray-50); border-radius: 10px;
+  font-size: 12px; color: var(--dark); border: 1px solid var(--border);
+}
+.sec-item-icon { font-size: 14px; }
