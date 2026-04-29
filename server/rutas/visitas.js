@@ -2,6 +2,7 @@
 const router = require('express').Router();
 const pool   = require('../bd/connection');
 const auth   = require('../middleware/authmiddleware');
+const { notificarIngreso } = require('../servicios/email');
 
 // GET /api/visitas/dentro  — personas dentro ahora
 router.get('/dentro', auth, async (req, res) => {
@@ -85,6 +86,23 @@ router.post('/ingreso', auth, async (req, res) => {
        VALUES ($1, $2, $3, $4) RETURNING *`,
       [visitante_id, apartamento, residente_responsable, req.usuario.id]
     );
+
+    // Enviar correo al residente (sin bloquear la respuesta)
+    pool.query('SELECT nombre, correo FROM residentes WHERE apartamento=$1 AND activo=TRUE', [apartamento])
+      .then(({ rows }) => {
+        if (!rows.length) return;
+        const residente = rows[0];
+        return notificarIngreso({
+          correoResidente: residente.correo,
+          nombreResidente: residente.nombre,
+          apartamento,
+          visitante: nombre,
+          documento,
+          vigilante: req.usuario.nombre,
+          horaIngreso: visita.rows[0].hora_ingreso,
+        });
+      })
+      .catch(err => console.error('[email] Error al enviar notificación:', err.message));
 
     res.status(201).json(visita.rows[0]);
 

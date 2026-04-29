@@ -9,8 +9,9 @@ const MENU = [
   { id: 'salida',     icon: '🚪', label: 'Registrar Salida' },
   { id: 'historial',  icon: '📋', label: 'Historial' },
   { id: 'frecuentes', icon: '⭐', label: 'Frecuentes' },
-  { id: 'reportes',   icon: '📊', label: 'Reportes',          seccion: 'Administración', soloAdmin: true },
-  { id: 'usuarios',   icon: '👥', label: 'Usuarios',          soloAdmin: true },
+  { id: 'reportes',    icon: '📊', label: 'Reportes',    seccion: 'Administración', soloAdmin: true },
+  { id: 'residentes', icon: '🏠', label: 'Residentes',                             soloAdmin: true },
+  { id: 'usuarios',   icon: '👥', label: 'Usuarios',                               soloAdmin: true },
 ];
 
 export default function Sidebar({ paginaActiva, navegar, cerrarSesion }) {
