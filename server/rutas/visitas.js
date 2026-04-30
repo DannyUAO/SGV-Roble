@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const pool   = require('../bd/connection');
 const auth   = require('../middleware/authmiddleware');
-const { notificarIngreso } = require('../servicios/email');
+const { notificarIngreso, notificarSalida } = require('../servicios/email');
 
 // GET /api/visitas/dentro  — personas dentro ahora
 router.get('/dentro', auth, async (req, res) => {
@@ -126,7 +126,32 @@ router.patch('/:id/salida', auth, async (req, res) => {
     if (!rows.length)
       return res.status(404).json({ error: 'Visita no encontrada o ya registró salida' });
 
-    res.json(rows[0]);
+    const visita = rows[0];
+    res.json(visita);
+
+    // Enviar correo al residente (sin bloquear la respuesta)
+    pool.query(
+      `SELECT r.nombre, r.correo, vt.nombre AS visitante, vt.documento
+       FROM residentes r
+       JOIN visitas vi ON vi.apartamento = r.apartamento
+       JOIN visitantes vt ON vt.id = vi.visitante_id
+       WHERE vi.id = $1 AND r.activo = TRUE`,
+      [visita.id]
+    ).then(({ rows: data }) => {
+      if (!data.length) return;
+      const d = data[0];
+      return notificarSalida({
+        correoResidente: d.correo,
+        nombreResidente: d.nombre,
+        apartamento: visita.apartamento,
+        visitante: d.visitante,
+        documento: d.documento,
+        vigilante: req.usuario.nombre,
+        horaIngreso: visita.hora_ingreso,
+        horaSalida: visita.hora_salida,
+      });
+    }).catch(err => console.error('[email] Error al enviar notificación de salida:', err.message));
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error del servidor' });
