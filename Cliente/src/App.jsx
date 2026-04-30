@@ -8,6 +8,7 @@ import Historial from './pages/historial/historial';
 import Frecuentes from './pages/frecuentes/frecuentes';
 import Usuarios from './pages/usuarios/usuarios';
 import Reportes from './pages/reportes/reportes';
+import Residentes from './pages/residentes/residentes';
 import authservice from './services/authservice';
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
       {pagina === 'frecuentes' && <Frecuentes  {...props} />}
       {pagina === 'usuarios'   && <Usuarios    {...props} />}
       {pagina === 'reportes'   && <Reportes    {...props} />}
+      {pagina === 'residentes' && <Residentes  {...props} />}
     </>
   );
 }

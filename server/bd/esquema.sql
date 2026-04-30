@@ -62,6 +62,19 @@ CREATE TABLE visitas (
 );
 
 -- ============================================================
+--  TABLA: residentes  (propietarios/arrendatarios de cada apartamento)
+-- ============================================================
+CREATE TABLE residentes (
+    id              SERIAL PRIMARY KEY,
+    apartamento     VARCHAR(20)  NOT NULL UNIQUE,
+    nombre          VARCHAR(100) NOT NULL,
+    correo          VARCHAR(150) NOT NULL,
+    activo          BOOLEAN      NOT NULL DEFAULT TRUE,
+    creado_en       TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
+    actualizado_en  TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
+
+-- ============================================================
 --  ÍNDICES  (mejoran rendimiento en búsquedas frecuentes)
 -- ============================================================
 
@@ -82,6 +95,9 @@ CREATE INDEX idx_visitas_visitante_id ON visitas(visitante_id);
 
 -- Búsqueda de usuarios por documento (para login)
 CREATE INDEX idx_usuarios_documento ON usuarios(documento);
+
+-- Buscar residente por apartamento (para notificaciones)
+CREATE INDEX idx_residentes_apartamento ON residentes(apartamento);
 
 -- ============================================================
 --  FUNCIÓN: actualizar campo updated_at automáticamente
@@ -105,6 +121,10 @@ CREATE TRIGGER trg_visitantes_updated
 
 CREATE TRIGGER trg_visitas_updated
     BEFORE UPDATE ON visitas
+    FOR EACH ROW EXECUTE FUNCTION fn_set_updated_at();
+
+CREATE TRIGGER trg_residentes_updated
+    BEFORE UPDATE ON residentes
     FOR EACH ROW EXECUTE FUNCTION fn_set_updated_at();
 
 -- ============================================================
