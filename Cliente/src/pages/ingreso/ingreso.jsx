@@ -17,8 +17,19 @@ export default function Ingreso({ navegar, cerrarSesion }) {
   const [filtroDocumento, setFiltroDocumento] = useState('');
 
   useEffect(() => {
-    visitasservice.getVisitantes()
-      .then(data => setVisitantes(data))
+    visitasservice.getHistorial()
+      .then(data => {
+        // Deduplicar por documento, quedar con el registro más reciente de cada uno
+        const mapa = new Map();
+        data.forEach(v => {
+          if (!mapa.has(v.documento)) mapa.set(v.documento, v);
+        });
+        // Ordenar alfabéticamente por nombre
+        const lista = Array.from(mapa.values()).sort((a, b) =>
+          a.visitante.localeCompare(b.visitante, 'es')
+        );
+        setVisitantes(lista);
+      })
       .catch(() => {});
   }, [exito]); // recarga tras cada ingreso exitoso
 
@@ -29,10 +40,8 @@ export default function Ingreso({ navegar, cerrarSesion }) {
   const seleccionarVisitante = (v) => {
     setForm(f => ({
       ...f,
-      nombre:    v.nombre    || '',
+      nombre:    v.visitante || '',
       documento: v.documento || '',
-      correo:    v.correo    || '',
-      telefono:  v.telefono  || '',
     }));
     setError('');
   };
@@ -151,10 +160,10 @@ export default function Ingreso({ navegar, cerrarSesion }) {
             ) : (
               <ul className="visitantes-ul">
                 {visitantesFiltrados.map(v => (
-                  <li key={v.id} className="visitante-item" onClick={() => seleccionarVisitante(v)}>
-                    <span className="visitante-avatar">{v.nombre.charAt(0).toUpperCase()}</span>
+                  <li key={v.visita_id} className="visitante-item" onClick={() => seleccionarVisitante(v)}>
+                    <span className="visitante-avatar">{v.visitante.charAt(0).toUpperCase()}</span>
                     <div className="visitante-info">
-                      <span className="visitante-nombre">{v.nombre}</span>
+                      <span className="visitante-nombre">{v.visitante}</span>
                       <span className="visitante-doc">Doc: {v.documento}</span>
                     </div>
                     <span className="visitante-accion">Seleccionar →</span>

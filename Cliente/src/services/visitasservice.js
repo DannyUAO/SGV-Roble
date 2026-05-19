@@ -22,9 +22,6 @@ const visitasservice = {
 
   // Buscar visitante por documento (autocompletado)
   buscarPorDocumento: (documento) => api.get(`/visitas/buscar?documento=${documento}`),
-
-  // Lista completa de visitantes registrados (orden alfabético)
-  getVisitantes: () => api.get('/visitas/visitantes'),
 };
 
 export default visitasservice;
