@@ -52,13 +52,13 @@
 
 .visitante-avatar {
   width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
-  background: var(--black);
+  background: var(--gray-100);
   display: flex; align-items: center; justify-content: center;
-  font-size: 16px; font-weight: 700; color: var(--primary);
+  font-size: 15px; font-weight: 700; color: var(--gray-700);
 }
 
 .visitante-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .visitante-nombre { font-size: 14px; font-weight: 600; color: var(--dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .visitante-doc    { font-size: 11px; color: var(--muted); }
 
-.visitante-accion { font-size: 11px; color: var(--primary); font-weight: 600; white-space: nowrap; }
+.visitante-accion { font-size: 11px; color: var(--teal); font-weight: 600; white-space: nowrap; }
