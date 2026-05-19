@@ -158,11 +158,14 @@ router.patch('/:id/salida', auth, async (req, res) => {
   }
 });
 
-// GET /api/visitas/visitantes  — lista todos los visitantes registrados, orden alfabético
+// GET /api/visitas/visitantes  — visitantes que aparecen en el historial, orden alfabético
 router.get('/visitantes', auth, async (req, res) => {
   try {
     const { rows } = await pool.query(
-      'SELECT id, nombre, documento, correo, telefono FROM visitantes ORDER BY nombre ASC'
+      `SELECT vt.id, vt.nombre, vt.documento, vt.correo, vt.telefono
+       FROM visitantes vt
+       WHERE vt.id IN (SELECT DISTINCT visitante_id FROM visitas)
+       ORDER BY vt.nombre ASC`
     );
     res.json(rows);
   } catch (err) {
