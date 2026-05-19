@@ -1,5 +1,5 @@
 // Cliente/src/pages/ingreso/ingreso.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import visitasservice from '../../services/visitasservice';
 import Sidebar from '../../componentes/sidebar/sidebar';
 import './ingreso.css';
@@ -12,6 +12,30 @@ export default function Ingreso({ navegar, cerrarSesion }) {
   const [error,    setError]    = useState('');
   const [exito,    setExito]    = useState(false);
   const [cargando, setCargando] = useState(false);
+
+  const [visitantes,      setVisitantes]      = useState([]);
+  const [filtroDocumento, setFiltroDocumento] = useState('');
+
+  useEffect(() => {
+    visitasservice.getVisitantes()
+      .then(data => setVisitantes(data))
+      .catch(() => {});
+  }, [exito]); // recarga tras cada ingreso exitoso
+
+  const visitantesFiltrados = filtroDocumento
+    ? visitantes.filter(v => v.documento.toLowerCase().includes(filtroDocumento.toLowerCase()))
+    : visitantes;
+
+  const seleccionarVisitante = (v) => {
+    setForm(f => ({
+      ...f,
+      nombre:    v.nombre    || '',
+      documento: v.documento || '',
+      correo:    v.correo    || '',
+      telefono:  v.telefono  || '',
+    }));
+    setError('');
+  };
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -109,6 +133,36 @@ export default function Ingreso({ navegar, cerrarSesion }) {
               </button>
             </form>
           )}
+
+          {/* Lista de visitantes registrados */}
+          <div className="card visitantes-lista-card">
+            <div className="visitantes-lista-header">
+              <h3>Visitantes registrados</h3>
+              <input
+                className="finput visitantes-filtro"
+                placeholder="Filtrar por documento..."
+                value={filtroDocumento}
+                onChange={e => setFiltroDocumento(e.target.value)}
+              />
+            </div>
+
+            {visitantesFiltrados.length === 0 ? (
+              <p className="visitantes-vacio">No se encontraron visitantes.</p>
+            ) : (
+              <ul className="visitantes-ul">
+                {visitantesFiltrados.map(v => (
+                  <li key={v.id} className="visitante-item" onClick={() => seleccionarVisitante(v)}>
+                    <span className="visitante-avatar">{v.nombre.charAt(0).toUpperCase()}</span>
+                    <div className="visitante-info">
+                      <span className="visitante-nombre">{v.nombre}</span>
+                      <span className="visitante-doc">Doc: {v.documento}</span>
+                    </div>
+                    <span className="visitante-accion">Seleccionar →</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </main>
     </div>

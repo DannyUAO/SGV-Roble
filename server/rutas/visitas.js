@@ -158,6 +158,19 @@ router.patch('/:id/salida', auth, async (req, res) => {
   }
 });
 
+// GET /api/visitas/visitantes  — lista todos los visitantes registrados, orden alfabético
+router.get('/visitantes', auth, async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      'SELECT id, nombre, documento, correo, telefono FROM visitantes ORDER BY nombre ASC'
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error del servidor' });
+  }
+});
+
 // GET /api/visitas/buscar?documento=xxx  — autocompletado por documento
 router.get('/buscar', auth, async (req, res) => {
   const { documento } = req.query;
